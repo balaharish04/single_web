@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <div class="container">
+        <div id="hero" class="section hero fade-in">
+            <h1>Welcome to My Single Page Website</h1>
+            <p>This is an example website created by me to share my details</p>
+        </div>
+        
+        <div id="about" class="section about fade-in">
+            <h2>About</h2>
+            <p>A highly motivated Electrical and Electronics Engineering with a strong analytical mindset and problem solving skills. Seeking an opportunity to showcase my technical skills and programming skills to make a transition into dynamic IT environment.</p>
+        </div>
+        
+        <div id="contact" class="section contact fade-in">
+            <h2>Contact</h2>
+            <a href="https://www.linkedin.com/in/balaharish-pandiyarajan/">LinkedIn</a>
+            <p>Email : balaharishpandiyarajan4@gmail.com</p>
+            <form onsubmit="submitForm(event)">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <button type="submit">Submit</button>
+            </form>
+            <p id="message"></p>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        function submitForm(event) {
+            event.preventDefault();
+            document.getElementById('message').innerText = 'Thank you for your message!';
+        }
+        
+        const sections = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
